@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
@@ -79,6 +80,10 @@ fun TelaPrincipal(modifier: Modifier = Modifier) {
 
 @Composable
 fun OutlinedText() {
+    val customFont = FontFamily(
+        Font(R.font.abel_regular, weight = FontWeight.Normal)
+    )
+
     Box {
         // Texto de contorno preto (leve deslocamento para cada direção)
         Text(
@@ -86,10 +91,10 @@ fun OutlinedText() {
             style = androidx.compose.ui.text.TextStyle(
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Default,
-                color = Color.Black // Cor do contorno
+                fontFamily = customFont,
+                color = Color.Black
             ),
-            modifier = androidx.compose.ui.Modifier.offset(2.dp, 2.dp)
+            modifier = Modifier.offset(2.dp, 2.dp)
         )
 
         // Texto branco por cima
@@ -98,12 +103,13 @@ fun OutlinedText() {
             style = androidx.compose.ui.text.TextStyle(
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Default,
-                color = Color.White // Cor principal do texto
+                fontFamily = customFont,
+                color = Color.White
             )
         )
     }
 }
+
 
 
 
@@ -177,12 +183,12 @@ fun CampoTexto(label: String) {
         modifier = Modifier
             .fillMaxWidth()
             .shadow(
-                elevation = 5.dp,
-                shape = RoundedCornerShape(10.dp),
-                clip = false
+                elevation = 2.dp,
+                shape = RoundedCornerShape(10.dp)
 
 
-            ).blur(5.dp).padding(0.dp, 0.dp, 0.dp, 5.dp)
+
+            ).blur(2.dp).padding(0.dp, 0.dp, 0.dp, 0.dp)
     ) {
         OutlinedTextField(
             value = texto,
@@ -192,6 +198,8 @@ fun CampoTexto(label: String) {
                 .fillMaxWidth()
                 .height(56.dp)
                 .padding(vertical = 4.dp),
+
+
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.Gray,
                 unfocusedBorderColor = Color.Gray
