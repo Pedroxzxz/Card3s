@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement.Bottom
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
@@ -21,8 +22,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -67,7 +70,11 @@ fun TelaPrincipal(modifier: Modifier = Modifier) {
 }
 
 @Composable
+
 fun Titulo() {
+    val customFont = FontFamily(
+        Font(R.font.abel_regular, weight = FontWeight.Normal)
+    )
     Box {
         // Texto de contorno preto (leve deslocamento para cada direção)
         Text(
@@ -77,6 +84,7 @@ fun Titulo() {
                 fontWeight = FontWeight.Bold,
                 fontFamily = Righteous,
                 color = Color.Black // Cor do conto3rno
+
             ),
             modifier = Modifier.offset(2.dp, 2.dp)
         )
@@ -89,10 +97,12 @@ fun Titulo() {
                 fontWeight = FontWeight.Bold,
                 fontFamily = Righteous,
                 color = Color(0xFFFFA500) // Cor principal do texto
+
             )
         )
     }
 }
+
 
 
 
@@ -132,6 +142,7 @@ fun Formulario(){
             }
 
             ClickableText(
+
                 text = annotatedString,
                 onClick = { offset ->
                     annotatedString.getStringAnnotations(tag = "link", start = offset, end = offset)
@@ -161,10 +172,7 @@ fun CampoTexto(label: String) {
     // Exibe o rótulo acima do campo
     Text(text = label, style = MaterialTheme.typography.titleMedium)
 
-    OutlinedTextField(
-        value = texto,
-        onValueChange = { texto = it },
-        shape = RoundedCornerShape(10.dp),
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp) // Ajusta a altura do campo
@@ -172,8 +180,10 @@ fun CampoTexto(label: String) {
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color(0xFFFFA500), // Borda ao focar
             unfocusedBorderColor = Color.Gray // Borda padrão
+
         )
-    )
+    }
+
 }
 
 
