@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement.Bottom
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
@@ -22,13 +21,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -38,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jogosecartas.ui.theme.JogosECartasTheme
 import com.example.jogosecartas.ui.theme.Righteous
-import java.lang.reflect.Type
 
 
 class MainActivity : ComponentActivity() {
@@ -72,9 +69,6 @@ fun TelaPrincipal(modifier: Modifier = Modifier) {
 @Composable
 
 fun Titulo() {
-    val customFont = FontFamily(
-        Font(R.font.abel_regular, weight = FontWeight.Normal)
-    )
     Box {
         // Texto de contorno preto (leve deslocamento para cada direção)
         Text(
@@ -172,7 +166,10 @@ fun CampoTexto(label: String) {
     // Exibe o rótulo acima do campo
     Text(text = label, style = MaterialTheme.typography.titleMedium)
 
-    Box(
+    OutlinedTextField(
+        value = texto,
+        onValueChange = { texto = it },
+        shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp) // Ajusta a altura do campo
@@ -180,11 +177,10 @@ fun CampoTexto(label: String) {
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = Color(0xFFFFA500), // Borda ao focar
             unfocusedBorderColor = Color.Gray // Borda padrão
-
         )
-    }
-
+    )
 }
+
 
 
 
