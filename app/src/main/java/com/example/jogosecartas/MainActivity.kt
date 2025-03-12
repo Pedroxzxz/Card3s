@@ -9,6 +9,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement.Bottom
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
@@ -31,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import com.example.jogosecartas.ui.theme.JogosECartasTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
@@ -140,6 +143,7 @@ fun Formulario(){
             }
 
             ClickableText(
+
                 text = annotatedString,
                 onClick = { offset ->
                     annotatedString.getStringAnnotations(tag = "link", start = offset, end = offset)
@@ -169,19 +173,32 @@ fun CampoTexto(label: String) {
     // Exibe o rótulo acima do campo
     Text(text = label, style = MaterialTheme.typography.titleMedium)
 
-    OutlinedTextField(
-        value = texto,
-        onValueChange = { texto = it },
-        shape = RoundedCornerShape(10.dp),
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(56.dp) // Ajusta a altura do campo
-            .padding(vertical = 4.dp),
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Color.Gray, // Borda ao focar
-            unfocusedBorderColor = Color.Gray // Borda padrão
+            .shadow(
+                elevation = 5.dp,
+                shape = RoundedCornerShape(10.dp),
+                clip = false
+
+
+            ).blur(5.dp).padding(0.dp, 0.dp, 0.dp, 5.dp)
+    ) {
+        OutlinedTextField(
+            value = texto,
+            onValueChange = { texto = it },
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .padding(vertical = 4.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.Gray,
+                unfocusedBorderColor = Color.Gray
+            )
         )
-    )
+    }
+
 }
 
 
