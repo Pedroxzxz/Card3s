@@ -5,45 +5,37 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.jogosecartas.ui.theme.JogosECartasTheme
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.jogosecartas.ui.theme.JogosECartasTheme
+import com.example.jogosecartas.ui.theme.Righteous
+import java.lang.reflect.Type
 
 
 class MainActivity : ComponentActivity() {
@@ -69,34 +61,34 @@ fun TelaPrincipal(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        OutlinedText()
+        Titulo()
         Formulario()
     }
 }
 
 @Composable
-fun OutlinedText() {
+fun Titulo() {
     Box {
         // Texto de contorno preto (leve deslocamento para cada direção)
         Text(
             text = "Card3s",
-            style = androidx.compose.ui.text.TextStyle(
+            style = TextStyle(
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Default,
-                color = Color.Black // Cor do contorno
+                fontFamily = Righteous,
+                color = Color.Black // Cor do conto3rno
             ),
-            modifier = androidx.compose.ui.Modifier.offset(2.dp, 2.dp)
+            modifier = Modifier.offset(2.dp, 2.dp)
         )
 
         // Texto branco por cima
         Text(
             text = "Card3s",
-            style = androidx.compose.ui.text.TextStyle(
+            style = TextStyle(
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Default,
-                color = Color.White // Cor principal do texto
+                fontFamily = Righteous,
+                color = Color(0xFFFFA500) // Cor principal do texto
             )
         )
     }
@@ -178,7 +170,7 @@ fun CampoTexto(label: String) {
             .height(56.dp) // Ajusta a altura do campo
             .padding(vertical = 4.dp),
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Color.Gray, // Borda ao focar
+            focusedBorderColor = Color(0xFFFFA500), // Borda ao focar
             unfocusedBorderColor = Color.Gray // Borda padrão
         )
     )
@@ -193,19 +185,19 @@ fun BotaoConfirmar() {
 
     Button(
         onClick = { /* Ação do botão */ },
-        modifier = Modifier.fillMaxWidth().size(50.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .size(50.dp),
         shape = RoundedCornerShape(10.dp)
 
 
         ) {
-        Text("Confirmar")
+        Text(text = "Confirmar")
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun TelaPrincipalPreview() {
-    JogosECartasTheme {
-        TelaPrincipal()
-    }
+private fun TelaInicialPreview() {
+    TelaPrincipal()
 }
