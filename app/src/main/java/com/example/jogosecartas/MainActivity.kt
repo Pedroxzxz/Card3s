@@ -2,11 +2,14 @@
 
 package com.example.jogosecartas
 
+import android.R.attr.onClick
 import android.os.Bundle
+import android.widget.Space
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +21,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
@@ -140,9 +144,72 @@ fun SegundaTela(navController: NavHostController) {
                 Icon(Icons.Default.Add, contentDescription = "Adicionar")
             }
         },
+        //CONTEUDO DO MENU!!!
+        // DEIXEI AS CORES ASSIM PRA SABER OS ESPACAMENTOS DE CADA ELEMENTO QUE EU COLOCAR
+        // PODE FAZER A ESTILIZACAO DO JEITO QUE QUISER AI
         content = { paddingValues ->
             Column(modifier = Modifier
-                .padding(paddingValues)) {
+                .fillMaxSize()
+                .padding(paddingValues)
+                .background(Color.Black) //Cor da Coluna Principal
+            ) {
+
+                Spacer(modifier = Modifier.height(64.dp) //ESPACO ENTRE A BARRA SUPERIOR E O BOTÃO JOGAR
+                    .fillMaxWidth()
+                    .background(Color.Red))
+
+                Row(modifier = Modifier //PRIMEIRA ROW - BOTAO JOGAR
+                    .fillMaxWidth()
+                    .background(Color.Green)
+                    .size(120.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        modifier = Modifier
+                            .width(240.dp) // Distribui espaço automaticamente
+                            .height(80.dp), // Altura fixa, mas sem largura fixa
+                        shape = RoundedCornerShape(10.dp),
+                        onClick = { /* Ação */ }) {
+                        Text(text = "JOGAR", fontSize = 32.sp, fontFamily = Righteous)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(32.dp) //ESPACO ENTRE O BOTÃO JOGAR E OS OUTROS BOTOES
+                    .fillMaxWidth()
+                    .background(Color.Red))
+
+                Row(    //SEGUNDA ROW
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp) // Melhor que size(100.dp)
+                        .background(Color.Yellow)
+                        .padding(horizontal = 16.dp), // Espaçamento lateral
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly // Distribuição mais equilibrada
+                ) {
+                    Button(
+                        modifier = Modifier
+                            .weight(1f) // Distribui espaço automaticamente
+                            .height(60.dp), // Altura fixa, mas sem largura fixa
+                        shape = RoundedCornerShape(10.dp),
+                        onClick = { /* Ação */ }
+                    ) {
+                        Text(text = "CARTAS", fontSize = 28.sp, fontFamily = Righteous)
+                    }
+
+                    Spacer(modifier = Modifier.width(16.dp)) // Espaço entre os botões cartas e sair
+
+                    Button(
+                        modifier = Modifier
+                            .weight(1f) // Mesmo peso para manter alinhado
+                            .height(60.dp),
+                        shape = RoundedCornerShape(10.dp),
+                        onClick = { /* Ação */ }
+                    ) {
+                        Text(text = "SAIR", fontSize = 28.sp, fontFamily = Righteous)
+                    }
+                }
             }
         }
     )
