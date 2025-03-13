@@ -11,6 +11,9 @@ import com.example.jogosecartas.R
 val Righteous = FontFamily(
     Font(R.font.righteous_regular)
 )
+val Abel = FontFamily(
+    Font(R.font.abel_regular, weight = FontWeight.Normal)
+)
 
 // Set of Material typography styles to start with
 val Typography = Typography(
