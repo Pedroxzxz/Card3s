@@ -5,7 +5,26 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Button
@@ -21,13 +40,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+
+import androidx.compose.ui.geometry.Offset
+
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
@@ -36,6 +60,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jogosecartas.ui.theme.JogosECartasTheme
 import com.example.jogosecartas.ui.theme.Righteous
+
+import androidx.compose.ui.graphics.*
+
+
+
 
 
 class MainActivity : ComponentActivity() {
@@ -70,6 +99,8 @@ fun TelaPrincipal(modifier: Modifier = Modifier) {
 
 fun Titulo() {
     Box {
+
+
         // Texto de contorno preto (leve deslocamento para cada direção)
         Text(
             text = "Card3s",
@@ -83,6 +114,34 @@ fun Titulo() {
             modifier = Modifier.offset(2.dp, 2.dp)
         )
 
+
+        val infiniteTransition = rememberInfiniteTransition()
+
+        // Tamanho do padrão do gradiente (ajuste conforme necessário)
+        val patternWidth = 500f
+
+        // Animação que move o gradiente continuamente de 0 até patternWidth
+        val offsetX by infiniteTransition.animateFloat(
+            initialValue = 0f,
+            targetValue = patternWidth,
+            animationSpec = infiniteRepeatable(
+                animation = tween(durationMillis = 6000, easing = LinearEasing),
+                repeatMode = RepeatMode.Restart
+            )
+        )
+
+        // Lista de cores cíclica: começa e termina com verde para transição suave
+        val colors = listOf(
+            Color.Green, Color.Blue, Color.Magenta, Color.Red, Color.Yellow, Color.Green
+        )
+
+        // Gradiente que se repete, usando tileMode = TileMode.Repeated
+        val gradientBrush = Brush.linearGradient(
+            colors = colors,
+            start = Offset(-offsetX, 0f),
+            end = Offset(-offsetX + patternWidth, 0f),
+            tileMode = TileMode.Repeated
+        )
         // Texto branco por cima
         Text(
             text = "Card3s",
@@ -90,7 +149,7 @@ fun Titulo() {
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = Righteous,
-                color = Color(0xFFFFA500) // Cor principal do texto
+                brush = gradientBrush// Cor principal do texto
 
             )
         )
@@ -179,6 +238,7 @@ fun CampoTexto(label: String) {
             unfocusedBorderColor = Color.Gray // Borda padrão
         )
     )
+
 }
 
 
