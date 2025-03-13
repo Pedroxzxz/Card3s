@@ -61,6 +61,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.jogosecartas.ui.theme.JogosECartasTheme
 import com.example.jogosecartas.ui.theme.Righteous
 
+
+
+//Novas Telas Vry
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
