@@ -2,9 +2,7 @@
 
 package com.example.jogosecartas
 
-import android.R.attr.onClick
 import android.os.Bundle
-import android.widget.Space
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -62,10 +60,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.jogosecartas.ui.theme.JogosECartasTheme
 import com.example.jogosecartas.ui.theme.Righteous
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -324,4 +318,5 @@ fun CampoTexto(label: String) {
 private fun TelaInicialPreview() {
     val navController = rememberNavController()
     SegundaTela(navController)
+//    TelaPrincipal(navController)
 }
