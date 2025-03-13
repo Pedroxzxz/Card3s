@@ -87,8 +87,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.jogosecartas.ui.theme.JogosECartasTheme
 import com.example.jogosecartas.ui.theme.Righteous
-
-
 import androidx.compose.ui.graphics.*
 
 
@@ -414,6 +412,6 @@ fun BotaoConfirmar() {
 @Composable
 private fun TelaInicialPreview() {
     val navController = rememberNavController()
-    SegundaTela(navController)
-//    TelaPrincipal(navController)
+//    SegundaTela(navController)
+    TelaPrincipal(navController)
 }
