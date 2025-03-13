@@ -7,11 +7,25 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+
+
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,7 +33,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+
 import androidx.compose.foundation.layout.width
+
+
+import androidx.compose.foundation.layout.*
+
+
+
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement.Bottom
+
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
@@ -27,33 +54,64 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
+
+
+
+import androidx.compose.ui.geometry.Offset
+
+
+
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.jogosecartas.ui.theme.JogosECartasTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.shadow
+
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+
+
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+
+
+
+
+import androidx.compose.ui.text.font.FontStyle
+
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.googlefonts.GoogleFont
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
+
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -63,7 +121,9 @@ import com.example.jogosecartas.ui.theme.Righteous
 
 
 
+
 //Novas Telas Vry
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,11 +157,14 @@ fun TelaPrincipal(navController: NavHostController) {
     ) {
         Titulo()
         Formulario(navController)
+        OutlinedText()
+        Formulario()
     }
 }
 
 @ExperimentalMaterial3Api
 @Composable
+
 fun SegundaTela(navController: NavHostController) {
     Scaffold(
         topBar = {
@@ -172,6 +235,7 @@ fun SegundaTela(navController: NavHostController) {
                     }
                 }
 
+
                 Spacer(modifier = Modifier.height(32.dp) //ESPACO ENTRE O BOTÃO JOGAR E OS OUTROS BOTOES
                     .fillMaxWidth()
                     .background(Color.Red))
@@ -214,25 +278,65 @@ fun SegundaTela(navController: NavHostController) {
 
 @Composable
 fun Titulo() {
+
     Box {
+        // Texto de contorno preto (leve deslocamento para cada direção)
+
         Text(
             text = "Card3s",
-            style = TextStyle(
+            style = androidx.compose.ui.text.TextStyle(
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
+
                 fontFamily = Righteous,
+
                 color = Color.Black
             ),
             modifier = Modifier.offset(2.dp, 2.dp)
         )
 
+
+
+        val infiniteTransition = rememberInfiniteTransition()
+
+        // Tamanho do padrão do gradiente (ajuste conforme necessário)
+        val patternWidth = 500f
+
+        // Animação que move o gradiente continuamente de 0 até patternWidth
+        val offsetX by infiniteTransition.animateFloat(
+            initialValue = 0f,
+            targetValue = patternWidth,
+            animationSpec = infiniteRepeatable(
+                animation = tween(durationMillis = 6000, easing = LinearEasing),
+                repeatMode = RepeatMode.Restart
+            )
+        )
+
+        // Lista de cores cíclica: começa e termina com verde para transição suave
+        val colors = listOf(
+            Color.Green, Color.Blue, Color.Magenta, Color.Red, Color.Yellow, Color.Green
+        )
+
+        // Gradiente que se repete, usando tileMode = TileMode.Repeated
+        val gradientBrush = Brush.linearGradient(
+            colors = colors,
+            start = Offset(-offsetX, 0f),
+            end = Offset(-offsetX + patternWidth, 0f),
+            tileMode = TileMode.Repeated
+        )
+        // Texto branco por cima
+
         Text(
             text = "Card3s",
-            style = TextStyle(
+            style = androidx.compose.ui.text.TextStyle(
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
+
                 fontFamily = Righteous,
-                color = Color(0xFFFFA500)
+
+                brush = gradientBrush// Cor principal do texto
+
+
             )
         )
     }
@@ -301,23 +405,47 @@ fun CampoTexto(label: String) {
 
     Text(text = label, style = MaterialTheme.typography.titleMedium)
 
-    OutlinedTextField(
-        value = texto,
-        onValueChange = { texto = it },
-        shape = RoundedCornerShape(10.dp),
+    Box(
         modifier = Modifier
             .fillMaxWidth()
+
             .height(56.dp)
             .padding(vertical = 4.dp),
         colors = OutlinedTextFieldDefaults.colors(
+
             focusedBorderColor = Color(0xFFFFA500),
             unfocusedBorderColor = Color.Gray
         )
     )
+
+
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+
+
+
+
+
 @Composable
+fun BotaoConfirmar() {
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+    Button(
+        onClick = { /* Ação do botão */ },
+        modifier = Modifier.fillMaxWidth().size(50.dp),
+        shape = RoundedCornerShape(10.dp)
+
+
+        ) {
+        Text("Confirmar")
+    }
+
+}
+
+@Preview(showBackground = true)
+@Composable
+
 private fun TelaInicialPreview() {
     val navController = rememberNavController()
     SegundaTela(navController)
