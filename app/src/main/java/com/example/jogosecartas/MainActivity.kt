@@ -90,7 +90,7 @@ import com.example.jogosecartas.ui.theme.Righteous
 import androidx.compose.ui.graphics.*
 
 
-
+/*------ Oiiiiii *-------*/
 
 
 
