@@ -123,7 +123,7 @@ fun MenuScreen(navController: NavHostController) {
                             .weight(1f) // Distribui espaço automaticamente
                             .height(60.dp), // Altura fixa, mas sem largura fixa
                         shape = RoundedCornerShape(10.dp),
-                        onClick = { /* Ação */ }
+                        onClick = { navController.navigate("cartas") }
                     ) {
                         Text(text = "CARTAS", fontSize = 28.sp, fontFamily = Righteous)
                     }
