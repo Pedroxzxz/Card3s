@@ -21,7 +21,7 @@ import com.example.jogosecartas.screens.LoginScreen
 import com.example.jogosecartas.screens.MenuScreen
 import com.example.jogosecartas.ui.theme.JogosECartasTheme
 
-
+//Alteracao
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
