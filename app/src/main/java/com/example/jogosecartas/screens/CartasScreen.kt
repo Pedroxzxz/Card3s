@@ -68,9 +68,9 @@ fun CartasScreen(navController: NavController){
                 highlightedText = "Dano facada dano dano dano"
             )
             CardZoomEffect(
-                imageResId = R.drawable.carta_ataque,
-                contentDescription = "Carta de Ataque",
-                highlightedText = "Danodanodano"
+                imageResId = R.drawable.carta_cura,
+                contentDescription = "Carta de Cura",
+                highlightedText = "Cura?"
             )
         }
     }
