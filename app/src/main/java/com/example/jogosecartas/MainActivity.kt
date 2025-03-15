@@ -47,14 +47,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.jogosecartas.ui.theme.JogosECartasTheme
-import com.example.jogosecartas.ui.theme.Righteous
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlin.random.Random
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
-import com.example.jogosecartas.components.Titulo
+import com.example.jogosecartas.screens.CartasScreen
 import com.example.jogosecartas.screens.LoginScreen
 import com.example.jogosecartas.screens.MenuScreen
 
@@ -69,7 +62,20 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JogosECartasTheme {
-                AppNavigation()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = "login"
+                    ) {
+                        composable(route = "login") { LoginScreen(navController) }
+                        composable(route = "menu") { MenuScreen(navController) }
+                        composable(route = "cartas") { CartasScreen(navController) }
+                    }
+                }
             }
         }
     }
