@@ -58,7 +58,15 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    //Fonts
     implementation("androidx.compose.ui:ui-text-google-fonts:1.0.0")
+
+
+
+    //Dependências do Navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
+    //Icons
     implementation("androidx.compose.material:material-icons-extended")
+    //Dependecia do accompanist-navigation
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.34.0")
 }

@@ -98,17 +98,9 @@ fun Formulario(navController: NavHostController) {
 
             ClickableText(
                 text = annotatedString,
-                onClick = { offset ->
-                    annotatedString.getStringAnnotations(tag = "link", start = offset, end = offset)
-                        .firstOrNull()?.let {
-                            Toast.makeText(
-                                context,
-                                "Você clicou em criar conta!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                }
+                onClick = { navController.navigate("registro") }
             )
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
