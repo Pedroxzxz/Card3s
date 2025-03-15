@@ -113,7 +113,7 @@ fun Formulario(navController: NavHostController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { navController.navigate("segunda_tela") },
+                onClick = { navController.navigate("menu") },
                 shape = RoundedCornerShape(10.dp),
                 elevation = ButtonDefaults.buttonElevation(
                     defaultElevation = 50.dp,
