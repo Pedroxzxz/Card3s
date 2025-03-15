@@ -56,6 +56,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import com.example.jogosecartas.components.Titulo
 import com.example.jogosecartas.screens.LoginScreen
+import com.example.jogosecartas.screens.MenuScreen
 
 
 /*------ Oiiiiii *-------*/
@@ -78,9 +79,9 @@ class MainActivity : ComponentActivity() {
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "tela_principal") {
-        composable("tela_principal") { LoginScreen(navController) }
-        //composable("segunda_tela") { SegundaTela(navController) }
+    NavHost(navController = navController, startDestination = "login") {
+        composable("login") { LoginScreen(navController) }
+        composable("menu") { MenuScreen(navController) }
     }
 }
 
