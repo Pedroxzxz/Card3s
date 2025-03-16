@@ -31,7 +31,7 @@ fun CampoTextoComum(
     placeholder: String,
     isPassword: Boolean = false,
     value: String,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
 

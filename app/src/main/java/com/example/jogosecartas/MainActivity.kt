@@ -47,13 +47,13 @@ class MainActivity : ComponentActivity() {
                         exitTransition = {
                             slideOutOfContainer(
                                 towards = AnimatedContentTransitionScope.SlideDirection.Up, //Direcao da Animacao
-                                animationSpec = tween(600) //Tempo da Animacao
+                                animationSpec = tween(800) //Tempo da Animacao
                             ) + fadeOut(animationSpec = tween(600))
                         },
                         enterTransition = {
                             slideIntoContainer(
                                 towards = AnimatedContentTransitionScope.SlideDirection.Down, //Direcao da Animacao
-                                animationSpec = tween(600) //Tempo da Animacao
+                                animationSpec = tween(800) //Tempo da Animacao
                             )
                         }
 

@@ -2,6 +2,7 @@ package com.example.jogosecartas.components
 
 import CampoTextoComum
 import android.widget.Toast
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,12 +38,20 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 
 @Composable
 fun Formulario(navController: NavHostController) {
+
+    var nome by remember { mutableStateOf("") }
+    var senha by remember { mutableStateOf("") }
+
+    var error by remember { mutableStateOf(false) }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,8 +64,6 @@ fun Formulario(navController: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
-            var nome by remember { mutableStateOf("") }
-            var senha by remember { mutableStateOf("") }
             // Campo para "Nome" (texto simples)
             CampoTextoComum(
                 label = "Nome",
@@ -66,7 +73,6 @@ fun Formulario(navController: NavHostController) {
                 onValueChange = { nome = it }
             )
 
-            // Campo para "Senha" (com transformação e ícone)
             CampoTextoComum(
                 label = "Senha",
                 placeholder = "Digite sua senha",
@@ -74,10 +80,6 @@ fun Formulario(navController: NavHostController) {
                 value = senha,
                 onValueChange = { senha = it }
             )
-
-            // ... demais componentes do formulário
-
-
 
             val context = LocalContext.current
 
@@ -107,6 +109,8 @@ fun Formulario(navController: NavHostController) {
             Button(
                 onClick = { navController.navigate("menu") },
                 shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(Color.White),
+
                 elevation = ButtonDefaults.buttonElevation(
                     defaultElevation = 50.dp,
                     pressedElevation = 12.dp,  // Sombras diferentes para cada estado, se quiser
@@ -117,8 +121,13 @@ fun Formulario(navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
+                    .border(4.dp, Color.Black, RoundedCornerShape(10.dp)),
             ) {
-                Text(text = "Confirmar")
+                Text(
+                    text = "Confirmar",
+                    color = Color.Black,
+                    fontSize = 18.sp
+                )
             }
 
         }

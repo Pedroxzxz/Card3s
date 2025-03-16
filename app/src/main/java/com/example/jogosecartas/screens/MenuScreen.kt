@@ -1,6 +1,10 @@
 package com.example.jogosecartas.screens
 
+import android.R.attr.onClick
+import android.annotation.SuppressLint
+import android.app.Activity
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +22,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,14 +32,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.navigation.NavHostController
 import com.example.jogosecartas.components.Titulo
 import com.example.jogosecartas.ui.theme.Righteous
 
+@SuppressLint("ContextCastToActivity")
 @Composable
 fun MenuScreen(navController: NavHostController) {
+
+    val context = LocalContext.current as? Activity
+
     Scaffold(
         topBar = {
             Row(
@@ -53,7 +64,7 @@ fun MenuScreen(navController: NavHostController) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Ícone de Casa",
-                        tint = Color(0xFFFFA500),
+                        tint = Color.Black,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
@@ -65,81 +76,61 @@ fun MenuScreen(navController: NavHostController) {
                 ) {}
             }
         },
-        bottomBar = {
-            BottomAppBar { Text("Barra Inferior") }
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { /* Ação */ }) {
-                Icon(Icons.Default.Add, contentDescription = "Adicionar")
-            }
-        },
-        //CONTEUDO DO MENU!!!
-        // DEIXEI AS CORES ASSIM PRA SABER OS ESPACAMENTOS DE CADA ELEMENTO QUE EU COLOCAR
-        // PODE FAZER A ESTILIZACAO DO JEITO QUE QUISER AI
         content = { paddingValues ->
             Column(modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(Color.Black) //Cor da Coluna Principal
             ) {
 
-                Spacer(modifier = Modifier.height(64.dp) //ESPACO ENTRE A BARRA SUPERIOR E O BOTÃO JOGAR
+                Spacer(modifier = Modifier.height(162.dp) //ESPACO ENTRE A BARRA SUPERIOR E O BOTÃO JOGAR
                     .fillMaxWidth()
-                    .background(Color.Red))
-
-                Row(modifier = Modifier //PRIMEIRA ROW - BOTAO JOGAR
-                    .fillMaxWidth()
-                    .background(Color.Green)
-                    .size(120.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                )
+                Column(modifier = Modifier //PRIMEIRA ROW - BOTAO JOGAR
+                    .fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Button(
                         modifier = Modifier
-                            .width(240.dp) // Distribui espaço automaticamente
-                            .height(80.dp), // Altura fixa, mas sem largura fixa
-                        shape = RoundedCornerShape(10.dp),
+                            .height(60.dp)
+                            .width(160.dp)
+                            .border(4.dp, Color.Black, RoundedCornerShape(10.dp)),
+                        colors = ButtonDefaults.buttonColors(Color.White),
+                        shape = RoundedCornerShape(12.dp),
                         onClick = { /* Ação */ }) {
-                        Text(text = "JOGAR", fontSize = 32.sp, fontFamily = Righteous)
+                        Text(text = "JOGAR", fontSize = 24.sp, fontFamily = Righteous, color = Color.Black,)
                     }
-                }
-
-
-                Spacer(modifier = Modifier.height(32.dp) //ESPACO ENTRE O BOTÃO JOGAR E OS OUTROS BOTOES
-                    .fillMaxWidth()
-                    .background(Color.Red))
-
-                Row(    //SEGUNDA ROW
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(100.dp) // Melhor que size(100.dp)
-                        .background(Color.Yellow)
-                        .padding(horizontal = 16.dp), // Espaçamento lateral
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly // Distribuição mais equilibrada
-                ) {
+                    Spacer(modifier = Modifier.height(16.dp)) //ESPACO ENTRE O BOTAO JOGAR E OS OUTROS BOTOES)
                     Button(
                         modifier = Modifier
-                            .weight(1f) // Distribui espaço automaticamente
-                            .height(60.dp), // Altura fixa, mas sem largura fixa
-                        shape = RoundedCornerShape(10.dp),
+                            .height(60.dp)
+                            .width(160.dp)
+                            .border(4.dp, Color.Black, RoundedCornerShape(10.dp)),
+                        colors = ButtonDefaults.buttonColors(Color.White),
+                        shape = RoundedCornerShape(12.dp),
                         onClick = { navController.navigate("cartas") }
                     ) {
-                        Text(text = "CARTAS", fontSize = 28.sp, fontFamily = Righteous)
+                        Text(text = "CARTAS", fontSize = 24.sp, fontFamily = Righteous, color = Color.Black,)
                     }
-
-                    Spacer(modifier = Modifier.width(16.dp)) // Espaço entre os botões cartas e sair
-
+                    Spacer(modifier = Modifier.height(16.dp)) //ESPACO ENTRE O BOTAO JOGAR E OS OUTROS BOTOES)
                     Button(
                         modifier = Modifier
-                            .weight(1f) // Mesmo peso para manter alinhado
-                            .height(60.dp),
-                        shape = RoundedCornerShape(10.dp),
-                        onClick = { /* Ação */ }
+                            .height(60.dp)
+                            .width(160.dp)
+                            .border(4.dp, Color.Black, RoundedCornerShape(10.dp)),
+                        colors = ButtonDefaults.buttonColors(Color.White),
+                        shape = RoundedCornerShape(12.dp),
+                        onClick = {
+                            context?.finishAffinity()
+                        }
                     ) {
-                        Text(text = "SAIR", fontSize = 28.sp, fontFamily = Righteous)
+                        Text(text = "SAIR", fontSize = 24.sp, fontFamily = Righteous, color = Color.Black)
                     }
+
                 }
+                Spacer(modifier = Modifier.height(32.dp) //ESPACO ENTRE O BOTÃO JOGAR E OS OUTROS BOTOES
+                    .fillMaxWidth()
+                )
             }
         }
     )

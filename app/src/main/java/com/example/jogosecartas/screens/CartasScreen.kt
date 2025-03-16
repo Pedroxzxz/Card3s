@@ -73,6 +73,30 @@ fun CartasScreen(navController: NavController){
                 highlightedText = "Cura?"
             )
         }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth() // Melhor que size(100.dp)
+                .height(200.dp)
+                .padding(horizontal = 16.dp), // Espaçamento lateral
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            CardZoomEffect(
+                imageResId = R.drawable.carta_defesa,
+                contentDescription = "Carta de Defesa",
+                highlightedText = "Defente-te por uno turno bb"
+            )
+            CardZoomEffect(
+                imageResId = R.drawable.carta_ataque,
+                contentDescription = "Carta de Ataque",
+                highlightedText = "Dano facada dano dano dano"
+            )
+            CardZoomEffect(
+                imageResId = R.drawable.carta_cura,
+                contentDescription = "Carta de Cura",
+                highlightedText = "Cura?"
+            )
+        }
     }
 }
 
