@@ -47,9 +47,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.jogosecartas.screens.AccountRememberScreen
 import com.example.jogosecartas.screens.CartasScreen
 import com.example.jogosecartas.screens.LoginScreen
 import com.example.jogosecartas.screens.MenuScreen
+import com.example.jogosecartas.screens.RegisterScreen
+import com.example.jogosecartas.ui.theme.JogosECartasTheme
 
 
 /*------ Oiiiiii *-------*/
@@ -74,6 +77,10 @@ class MainActivity : ComponentActivity() {
                         composable(route = "login") { LoginScreen(navController) }
                         composable(route = "menu") { MenuScreen(navController) }
                         composable(route = "cartas") { CartasScreen(navController) }
+                        composable(route = "register") { RegisterScreen(navController) }
+                        composable(route = "lembrar") { AccountRememberScreen(navController) }
+
+
                     }
                 }
             }

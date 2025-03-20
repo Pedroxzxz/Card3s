@@ -98,16 +98,34 @@ fun Formulario(navController: NavHostController) {
 
             ClickableText(
                 text = annotatedString,
-                onClick = { offset ->
-                    annotatedString.getStringAnnotations(tag = "link", start = offset, end = offset)
-                        .firstOrNull()?.let {
-                            Toast.makeText(
-                                context,
-                                "Você clicou em criar conta!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                onClick = { navController.navigate("register") }
+
+
+            )
+
+            RememberAccountSelect()
+
+            val forgetPasswordString = buildAnnotatedString {
+                append("Sou tolinho e ")
+                pushStringAnnotation(tag = "link", annotation = "esqueceu_senha")
+                withStyle(
+                    style = SpanStyle(
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Blue,
+                        textDecoration = TextDecoration.Underline
+                    )
+                ){
+                    append("esqueci minha senha :(")
                 }
+                pop()
+
+            }
+
+            ClickableText(
+                text = forgetPasswordString,
+                onClick = { navController.navigate("lembrar") }
+
+
             )
 
             Spacer(modifier = Modifier.height(16.dp))

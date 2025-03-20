@@ -31,6 +31,7 @@ fun CampoTextoComum(
     placeholder: String,
     isPassword: Boolean = false,
     value: String,
+    passwordIcon: Boolean = true,
     onValueChange: (String) -> Unit
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
@@ -55,7 +56,7 @@ fun CampoTextoComum(
                     style = MaterialTheme.typography.bodyMedium
                 )
             },
-            visualTransformation = if (isPassword && !passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
+            visualTransformation = if (isPassword && !passwordVisible && passwordIcon) PasswordVisualTransformation() else VisualTransformation.None,
             trailingIcon = {
                 if (isPassword) {
                     val image = if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
